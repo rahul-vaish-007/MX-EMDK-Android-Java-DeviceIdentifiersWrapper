@@ -118,13 +118,15 @@ As the previous methods are asynchronous, if you need both information, it is st
 
 Sample code if you need to get both device identifiers:
 ```java
-     private void getSerialNumber()
+     private void getDevicesIdentifiers()
      {
+        // We first ask for the SerialNumber
          DIHelper.getSerialNumber(this, new IDIResultCallbacks() {
              @Override
              public void onSuccess(String message) {
                  // The message contains the serial number
                  String mySerialNumber = message;
+                 // We've got the serial number, now we can ask for the IMEINumber
                  getIMEINumber();
              }
 
@@ -132,7 +134,8 @@ Sample code if you need to get both device identifiers:
              public void onError(String message) {
                 // An error occured
                 // Do something here with the error message
-                // Then call the getIMEINumber method
+                // We had an error with the Serial Number, but it
+                // doesn't prevent us from calling the getIMEINumber method
                 getIMEINumber();
              }
 
