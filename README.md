@@ -84,7 +84,7 @@ Snippet code to use to retrieve the Serial Number of the device:
 
              @Override
              public void onError(String message) {
-                // An error occured
+                // An error occurred
              }
 
              @Override
@@ -110,7 +110,7 @@ Snippet code to use to retrieve the Serial Number of the device:
 
             @Override
             public void onError(String message) {
-                // An error occured
+                // An error occurred
             }
 
             @Override
