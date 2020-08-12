@@ -1,4 +1,4 @@
-# EMDK-DeviceIdentifiers-Sample
+# DeviceIdentifiersWrapper-Sample
 
 How to access device identifiers such as serial number and IMEI on Zebra devices running Android 10
 
