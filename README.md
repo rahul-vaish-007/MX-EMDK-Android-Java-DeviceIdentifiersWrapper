@@ -35,7 +35,7 @@ Then add the uses-library element to your application
 ```
 
 Finally, add EMDK dependency to your application build.graddle file:
-```json
+```text
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
