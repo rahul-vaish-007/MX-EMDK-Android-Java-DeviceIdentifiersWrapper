@@ -63,7 +63,7 @@ Snippet code to use to retrieve the Serial Number of the device:
              @Override
              public void onSuccess(String message) {
                  // The message contains the serial number
-                 String mySerialNumber = message
+                 String mySerialNumber = message;
              }
 
              @Override
