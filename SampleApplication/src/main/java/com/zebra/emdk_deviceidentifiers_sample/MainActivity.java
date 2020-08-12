@@ -14,7 +14,7 @@ import com.zebra.deviceidentifierswrapper.IDIResultCallbacks;
 public class MainActivity extends AppCompatActivity {
 
     String TAG = "DeviceID";
-    
+
     static  String status = "";
     TextView tvStatus;
     TextView tvSerialNumber;
