@@ -12,6 +12,7 @@ You can do it using StageNow, more details here: https://github.com/darryncampbe
 
 Or you can use this wrapper that will automatically register your application if it is necessary.
 
+
 To use this helper on Zebra Android devices running Android 10 or higher, first declare a new permission in your AndroidManifest.xml
 
 ```xml
