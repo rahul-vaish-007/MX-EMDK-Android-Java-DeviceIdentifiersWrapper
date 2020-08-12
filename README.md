@@ -13,12 +13,14 @@ You can do it using StageNow, more details here: https://github.com/darryncampbe
 Or you can use this wrapper that will automatically register your application if it is necessary.
 
 
+
 To use this helper on Zebra Android devices running Android 10 or higher, first declare a new permission in your AndroidManifest.xml
 
 ```xml
 <uses-permission android:name="com.zebra.provider.READ"/>
 <uses-permission android:name="com.symbol.emdk.permission.EMDK" />
 ```
+
 
 Then add the uses-library element to your application 
 ```xml
@@ -45,6 +47,7 @@ Sample AdroidManifest.xml:
     </application>
 ```
 
+
 Finally, add EMDK dependency to your application build.graddle file:
 ```text
     compileOnly 'com.symbol:emdk:+'
@@ -62,9 +65,11 @@ dependencies {
 }
 ```
 
+
 Add the module DeviceIdentifierWrapper as a dependency to your application.
 
 Now you can use the following snippet codes to retrieve IMEI number and Serial Number information.
+
 
 Snippet code to use to retrieve the Serial Number of the device:
 ```java
@@ -91,6 +96,7 @@ Snippet code to use to retrieve the Serial Number of the device:
      }
 ```
 
+
 Snippet code to use to retrieve the Serial Number of the device:
 ```java
     private void getIMEINumber(Context context)
@@ -115,6 +121,7 @@ Snippet code to use to retrieve the Serial Number of the device:
         });
     }
 ```
+
 
 As the previous methods are asynchronous, if you need both information, it is strongly recommended to call the second request inside the onSuccess or onError of the first request. 
 
