@@ -14,7 +14,10 @@ To access the serial number and IMEI file on Zebra Android devices running Andro
 ```
 
 Then add the uses-library element to your application 
-
+```xml
+        <uses-library android:name="com.symbol.emdk" />
+```
+Sample AdroidManifest.xml:
 ```xml
     <application
         android:allowBackup="true"
@@ -35,6 +38,11 @@ Then add the uses-library element to your application
 ```
 
 Finally, add EMDK dependency to your application build.graddle file:
+```text
+    compileOnly 'com.symbol:emdk:+'
+```
+
+Sample build.graddle:
 ```text
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
