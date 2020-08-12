@@ -65,9 +65,9 @@ Now you can use the following snippet codes to retrieve IMEI number and Serial N
 Snippet code to use to retrieve the Serial Number of the device:
 
 ```java
-     private void getSerialNumber()
+     private void getSerialNumber(Context context)
      {
-         DIHelper.getSerialNumber(this, new IDIResultCallbacks() {
+         DIHelper.getSerialNumber(context, new IDIResultCallbacks() {
              @Override
              public void onSuccess(String message) {
                  // The message contains the serial number
@@ -91,9 +91,9 @@ Snippet code to use to retrieve the Serial Number of the device:
 Snippet code to use to retrieve the Serial Number of the device:
 
 ```java
-    private void getIMEINumber()
+    private void getIMEINumber(Context context)
     {
-        DIHelper.getIMEINumber(this, new IDIResultCallbacks() {
+        DIHelper.getIMEINumber(context, new IDIResultCallbacks() {
             @Override
             public void onSuccess(String message) {
                 // We've got an EMEI number
@@ -118,16 +118,16 @@ As the previous methods are asynchronous, if you need both information, it is st
 
 Sample code if you need to get both device identifiers:
 ```java
-     private void getDevicesIdentifiers()
+     private void getDevicesIdentifiers(Context context)
      {
         // We first ask for the SerialNumber
-         DIHelper.getSerialNumber(this, new IDIResultCallbacks() {
+         DIHelper.getSerialNumber(context, new IDIResultCallbacks() {
              @Override
              public void onSuccess(String message) {
                  // The message contains the serial number
                  String mySerialNumber = message;
                  // We've got the serial number, now we can ask for the IMEINumber
-                 getIMEINumber();
+                 getIMEINumber(context);
              }
 
              @Override
@@ -136,7 +136,7 @@ Sample code if you need to get both device identifiers:
                 // Do something here with the error message
                 // We had an error with the Serial Number, but it
                 // doesn't prevent us from calling the getIMEINumber method
-                getIMEINumber();
+                getIMEINumber(context);
              }
 
              @Override
