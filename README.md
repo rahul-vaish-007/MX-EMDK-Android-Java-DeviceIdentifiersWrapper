@@ -7,7 +7,9 @@ Android 10 limited access to device identifiers for all apps running on the plat
 **Zebra mobile computers running Android 10 are able to access both the serial number and IMEI** however applications need to be **explicitly granted the ability** to do so and use a proprietary API.
 
 To access to this API, you must first register your application using the AccessMgr MX's CSP.
+
 You can do it using StageNow, more details here: https://github.com/darryncampbell/EMDK-DeviceIdentifiers-Sample
+
 Or you can use this wrapper that will automatically register your application if it is necessary.
 
 To use this helper on Zebra Android devices running Android 10 or higher, first declare a new permission in your AndroidManifest.xml
@@ -21,6 +23,7 @@ Then add the uses-library element to your application
 ```xml
         <uses-library android:name="com.symbol.emdk" />
 ```
+
 Sample AdroidManifest.xml:
 ```xml
     <application
@@ -63,7 +66,6 @@ Add the module DeviceIdentifierWrapper as a dependency to your application.
 Now you can use the following snippet codes to retrieve IMEI number and Serial Number information.
 
 Snippet code to use to retrieve the Serial Number of the device:
-
 ```java
      private void getSerialNumber(Context context)
      {
@@ -89,7 +91,6 @@ Snippet code to use to retrieve the Serial Number of the device:
 ```
 
 Snippet code to use to retrieve the Serial Number of the device:
-
 ```java
     private void getIMEINumber(Context context)
     {
