@@ -10,39 +10,78 @@ To access the serial number and IMEI file on Zebra Android devices running Andro
 
 ```xml
 <uses-permission android:name="com.zebra.provider.READ"/>
+<uses-permission android:name="com.symbol.emdk.permission.EMDK" />
 ```
 
-Then use the [MX access manager](https://techdocs.zebra.com/mx/accessmgr/) to allow your application to call the service identifiers associated with the serial number and IMEI
+Then add the uses-library element to your application 
 
-The MX access manager settings to enable this are as follows:
-- Service Access Action: "AllowCaller" (or 'Allow Caller to Call Service')
-- Service Identifier: For the serial number use content://oem_info/oem.zebra.secure/build_serial.  For the IMEI use content://oem_info/wan/imei.  If you want to allow your app access to both, you will need to declare two different instances of the AccessManager.
-- Caller Package Name: Your package name, in the case of this sample it is com.zebra.emdk_deviceidentifiers_sample.
-- Caller Signature: The signing certificate of your application.  For more information on generating this see https://github.com/darryncampbell/MX-SignatureAuthentication-Demo.
+```xml
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <uses-library android:name="com.symbol.emdk" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-You can apply the MX access manager settings in one of three ways:
-1. Via StageNow
-2. Via your EMM
-3. Via your application, using the EMDK Profile Manager.
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+```
 
-For example, StageNow will look as follows to enable access to the serial number:
+Snippet code to use to retrieve the Serial Number of the device:
 
-![StageNow](https://github.com/darryncampbell/EMDK-DeviceIdentifiers-Sample/raw/master/screenshots/stagenow.png)
+```java
+     private void getSerialNumber()
+     {
+         DIHelper.getSerialNumber(this, new IDIResultCallbacks() {
+             @Override
+             public void onSuccess(String message) {
+                 // The message contains the serial number
+                 String mySerialNumber = message
+             }
 
-You can then run this sample app and should see something like the below:
+             @Override
+             public void onError(String message) {
+                // An error occured
+             }
 
-![Working](https://github.com/darryncampbell/EMDK-DeviceIdentifiers-Sample/raw/master/screenshots/working.jpg)
+             @Override
+             public void onDebugStatus(String message) {
+                // You can use this method to get verbose information
+                // about what's happening behing the curtain             
+             }
+         });
+     }
+```
 
-Or, on a device that does not have WAN capabilities, i.e. no SIM card or data connection: 
+Snippet code to use to retrieve the Serial Number of the device:
 
-![Non-WAN](https://github.com/darryncampbell/EMDK-DeviceIdentifiers-Sample/raw/master/screenshots/non_wan.jpg)
+```java
+    private void getIMEINumber()
+    {
+        DIHelper.getIMEINumber(this, new IDIResultCallbacks() {
+            @Override
+            public void onSuccess(String message) {
+                // We've got an EMEI number
+                String myIMEI = message;
+            }
 
-## Handling errors:
+            @Override
+            public void onError(String message) {
+                // An error occured
+            }
 
-If you failed to correctly allow your application access to oem_info service, you will see an error stating so against each property you did not assign access to, as shown below:
-
-![no_service_access](https://github.com/darryncampbell/EMDK-DeviceIdentifiers-Sample/raw/master/screenshots/no_service_access.jpg)
-
-Assign access to your device and re-run the application.
-
-
+            @Override
+            public void onDebugStatus(String message) {
+                // You can use this method to get verbose information
+                // about what's happening behing the curtain
+            }
+        });
+    }
+```
