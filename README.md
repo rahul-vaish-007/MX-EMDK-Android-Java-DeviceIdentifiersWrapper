@@ -84,7 +84,7 @@ Snippet code to use to retrieve the Serial Number of the device:
 
              @Override
              public void onError(String message) {
-                // An error occured
+                // An error occurred
              }
 
              @Override
@@ -110,13 +110,13 @@ Snippet code to use to retrieve the Serial Number of the device:
 
             @Override
             public void onError(String message) {
-                // An error occured
+                // An error occurred
             }
 
             @Override
             public void onDebugStatus(String message) {
                 // You can use this method to get verbose information
-                // about what's happening behing the curtain
+                // about what's happening behind the curtain
             }
         });
     }
@@ -151,7 +151,7 @@ Sample code if you need to get both device identifiers:
              @Override
              public void onDebugStatus(String message) {
                 // You can use this method to get verbose information
-                // about what's happening behing the curtain             
+                // about what's happening behind the curtain             
              }
          });
      }
