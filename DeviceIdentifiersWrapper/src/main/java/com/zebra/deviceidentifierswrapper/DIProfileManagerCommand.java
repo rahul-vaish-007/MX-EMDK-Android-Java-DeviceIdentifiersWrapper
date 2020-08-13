@@ -163,6 +163,11 @@ class DIProfileManagerCommand extends DICommandBase {
 
     private void onEMDKManagerClosed()
     {
+        releaseManagers();
+    }
+
+    private void releaseManagers()
+    {
         if(mProfileManager != null)
         {
             mProfileManager = null;
@@ -187,18 +192,22 @@ class DIProfileManagerCommand extends DICommandBase {
 
     private void onProfileExecutedWithSuccess()
     {
+        releaseManagers();
         if(idiProfileManagerCommandResult != null)
         {
             idiProfileManagerCommandResult.onSuccess("Success applying profile:" + msProfileName + "\nProfileData:" + msProfileData);
         }
+
     }
 
     private void onProfileExecutedError(String message)
     {
+        releaseManagers();
         if(idiProfileManagerCommandResult != null)
         {
             idiProfileManagerCommandResult.onError("Error on profile: " + msProfileName + "\nError:" + message + "\nProfileData:" + msProfileData);
         }
+
    }
 
     private void onProfileExecutedStatusChanged(String message)
@@ -261,6 +270,7 @@ class DIProfileManagerCommand extends DICommandBase {
         {
             logMessage("Profile executed with success: " + msProfileName, EMessageType.DEBUG);
             onProfileExecutedWithSuccess();
+            return;
         }
         else
         {
@@ -279,12 +289,12 @@ class DIProfileManagerCommand extends DICommandBase {
             event = myParser.getEventType();
             // An object that will store a temporary error holder if an error characteristic is found
             ErrorHolder tempErrorHolder = null;
-            logMessage("XML document", EMessageType.VERBOSE);
+            //logMessage("XML document", EMessageType.VERBOSE);
             while (event != XmlPullParser.END_DOCUMENT) {
                 String name = myParser.getName();
                 switch (event) {
                     case XmlPullParser.START_TAG:
-                        logMessage("XML Element:<" + myParser.getText()+">", EMessageType.VERBOSE);
+                        //logMessage("XML Element:<" + myParser.getText()+">", EMessageType.VERBOSE);
                         if (name.equals("characteristic-error"))
                         {
                             if(tempErrorHolder == null)
@@ -312,7 +322,7 @@ class DIProfileManagerCommand extends DICommandBase {
                         }
                         break;
                     case XmlPullParser.END_TAG:
-                        logMessage("XML Element:<//" + myParser.getText()+">", EMessageType.VERBOSE);
+                        //logMessage("XML Element:<//" + myParser.getText()+">", EMessageType.VERBOSE);
                         break;
                 }
                 event = myParser.next();

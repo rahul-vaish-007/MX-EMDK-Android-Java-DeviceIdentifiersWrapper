@@ -13,7 +13,7 @@ abstract class DICommandBase {
     /*
     A TAG if we want to log something
      */
-    protected static String TAG = "DIWrapper";
+    protected static String TAG = "DIWrapperMX";
 
     /*
     A context to work with intents

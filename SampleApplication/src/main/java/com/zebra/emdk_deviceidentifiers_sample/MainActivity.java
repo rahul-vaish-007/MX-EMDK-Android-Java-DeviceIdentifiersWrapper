@@ -11,6 +11,20 @@ import android.widget.TextView;
 import com.zebra.deviceidentifierswrapper.DIHelper;
 import com.zebra.deviceidentifierswrapper.IDIResultCallbacks;
 
+/**
+ * Device Identifiers Sample
+ *
+ * Original Device Identifier Sample Code:
+ *          - Darryn Campbell
+ *          - https://github.com/darryncampbell/EMDK-DeviceIdentifiers-Sample
+ *
+ *  Wrapper Code:
+ *          - Trudu Laurent
+ *          - https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
+ *
+ *  (c) Zebra 2020
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     String TAG = "DeviceID";
@@ -48,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
              @Override
              public void onError(String message) {
-                 updateTextViewContent(tvSerialNumber, message);
+                 addMessageToStatusText(message);
                  // We had an error, but we like to play, so we try the IMEI Number
                  getIMEINumber();
              }
@@ -71,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(String message) {
-                updateTextViewContent(tvIMEI, message);
+                addMessageToStatusText(message);
             }
 
             @Override
