@@ -97,7 +97,7 @@ Snippet code to use to retrieve the Serial Number of the device:
 ```
 
 
-Snippet code to use to retrieve the Serial Number of the device:
+Snippet code to use to retrieve the IMEI of the device:
 ```java
     private void getIMEINumber(Context context)
     {
