@@ -1,5 +1,7 @@
 # DeviceIdentifiersWrapper-Sample
 
+A wrapper to easily retrieve Serial Number and IMEI number on Android 10+ Zebra devices.
+
 How to access device identifiers such as serial number and IMEI on Zebra devices running Android 10
 
 Android 10 limited access to device identifiers for all apps running on the platform regardless of their target API level.  As explained in the docs for [Android 10 privacy changes](https://developer.android.com/about/versions/10/privacy/changes) this includes the serial number, IMEI and some other identifiable information.
