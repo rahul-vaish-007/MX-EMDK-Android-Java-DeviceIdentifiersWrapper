@@ -48,9 +48,9 @@ Sample AdroidManifest.xml:
 ```
 
 
-Finally, add EMDK dependency to your application build.graddle file:
+Finally, add DeviceIdentifierWrapper dependency to your application build.graddle file:
 ```text
-    compileOnly 'com.symbol:emdk:+'
+        implementation 'com.zebra.deviceidentifierswrapper:deviceidentifierswrapper:0.1'        
 ```
 
 Sample build.graddle:
@@ -61,12 +61,9 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compileOnly 'com.symbol:emdk:+'
+    implementation 'com.zebra.deviceidentifierswrapper:deviceidentifierswrapper:0.1'
 }
 ```
-
-
-Add the module DeviceIdentifierWrapper as a dependency to your application.
 
 Now you can use the following snippet codes to retrieve IMEI number and Serial Number information.
 
