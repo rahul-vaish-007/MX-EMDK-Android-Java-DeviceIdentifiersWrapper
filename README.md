@@ -1,6 +1,6 @@
 # DeviceIdentifiersWrapper-Sample
 
-A wrapper to easily retrieve Serial Number and IMEI number on Android 10+ Zebra devices.
+A wrapper to easily retrieve the Serial Number and the IMEI number of an Android 10+ Zebra device.
 
 How to access device identifiers such as serial number and IMEI on Zebra devices running Android 10
 
