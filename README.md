@@ -1,5 +1,7 @@
 # DeviceIdentifiersWrapper-Sample
 
+A wrapper to easily retrieve the Serial Number and the IMEI number of an Android 10+ Zebra device.
+
 How to access device identifiers such as serial number and IMEI on Zebra devices running Android 10
 
 Android 10 limited access to device identifiers for all apps running on the platform regardless of their target API level.  As explained in the docs for [Android 10 privacy changes](https://developer.android.com/about/versions/10/privacy/changes) this includes the serial number, IMEI and some other identifiable information.
@@ -48,9 +50,9 @@ Sample AdroidManifest.xml:
 ```
 
 
-Finally, add EMDK dependency to your application build.graddle file:
+Finally, add DeviceIdentifierWrapper dependency to your application build.graddle file:
 ```text
-    compileOnly 'com.symbol:emdk:+'
+        implementation 'com.zebra.deviceidentifierswrapper:deviceidentifierswrapper:0.1'        
 ```
 
 Sample build.graddle:
@@ -61,12 +63,9 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compileOnly 'com.symbol:emdk:+'
+    implementation 'com.zebra.deviceidentifierswrapper:deviceidentifierswrapper:0.1'
 }
 ```
-
-
-Add the module DeviceIdentifierWrapper as a dependency to your application.
 
 Now you can use the following snippet codes to retrieve IMEI number and Serial Number information.
 
@@ -90,14 +89,14 @@ Snippet code to use to retrieve the Serial Number of the device:
              @Override
              public void onDebugStatus(String message) {
                 // You can use this method to get verbose information
-                // about what's happening behing the curtain             
+                // about what's happening behind the curtain             
              }
          });
      }
 ```
 
 
-Snippet code to use to retrieve the Serial Number of the device:
+Snippet code to use to retrieve the IMEI of the device:
 ```java
     private void getIMEINumber(Context context)
     {
