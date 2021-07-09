@@ -50,7 +50,7 @@ Sample AdroidManifest.xml:
 ```
 
 You'll need to add a the jitpack.io repository in your build.graddle file:
-```text
+```json
     repositories {
         google()
         maven { url 'https://jitpack.io' }
