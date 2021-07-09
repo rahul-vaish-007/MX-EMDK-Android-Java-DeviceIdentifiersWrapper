@@ -70,7 +70,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.zebra.deviceidentifierswrapper:deviceidentifierswrapper:0.1'
+    implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.2'
 }
 ```
 
