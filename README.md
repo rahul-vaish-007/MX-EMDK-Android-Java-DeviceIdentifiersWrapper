@@ -49,10 +49,17 @@ Sample AdroidManifest.xml:
     </application>
 ```
 
+You'll need to add a the jitpack.io repository in your build.graddle file:
+```text
+    repositories {
+        google()
+        maven { url 'https://jitpack.io' }
+    }    
+```
 
 Finally, add DeviceIdentifierWrapper dependency to your application build.graddle file:
 ```text
-        implementation 'com.zebra.deviceidentifierswrapper:deviceidentifierswrapper:0.1'        
+        implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.2'       
 ```
 
 Sample build.graddle:
