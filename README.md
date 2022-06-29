@@ -1,5 +1,14 @@
 # DeviceIdentifiersWrapper-Sample
 
+# NEW !!! Change of REPOSITORY and new UPDATE 0.3 FOR A11... #
+```text
+        Update your graddle distribution to >= 7.3.3
+        update your compileSdkVersion to 30
+        Update your Manifest.xml file to add the Query element (as explained in this description)
+        Add jitpack.io repository to the project build.graddle file : maven { url 'https://jitpack.io' }
+        Update the dependency in the graddle application file: implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.3' or replace 0.3 with + to get the latest version automatically
+```
+
 A wrapper to easily retrieve the Serial Number and the IMEI number of an Android 10+ Zebra device.
 
 How to access device identifiers such as serial number and IMEI on Zebra devices running Android 10
@@ -23,6 +32,13 @@ To use this helper on Zebra Android devices running Android 10 or higher, first 
 <uses-permission android:name="com.symbol.emdk.permission.EMDK" />
 ```
 
+Then add a query element to retrive the data (only necessary for Android builds >= 11)
+
+```xml
+    <queries>
+        <provider android:authorities="oem_info" />
+    </queries>
+```
 
 Then add the uses-library element to your application 
 ```xml
@@ -31,6 +47,18 @@ Then add the uses-library element to your application
 
 Sample AdroidManifest.xml:
 ```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zebra.emdk_deviceidentifiers_sample">
+    <!--> TODO: Add these permissions to your manifest </-->
+    <uses-permission android:name="com.zebra.provider.READ"/>
+    <uses-permission android:name="com.symbol.emdk.permission.EMDK" />
+
+    <!--> TODO: Add query element to your manifest </-->
+    <queries>
+        <provider android:authorities="oem_info" />
+    </queries>
+        
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -47,22 +75,47 @@ Sample AdroidManifest.xml:
             </intent-filter>
         </activity>
     </application>
+ </manifest>
 ```
-
-You'll need to add a the jitpack.io repository in your build.graddle file:
-```graddle
+Update your project build.graddle file to add jitpack repository
+```text
+        maven { url 'https://jitpack.io' }        
+```
+Sample project build.gradle
+```text
+        buildscript {
     repositories {
         google()
+        jcenter()
         maven { url 'https://jitpack.io' }
-    }    
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}       
 ```
 
 Finally, add DeviceIdentifierWrapper dependency to your application build.graddle file:
 ```text
-        implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.2'       
+        implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.3'        
 ```
 
-Sample build.graddle:
+Sample application build.graddle:
 ```text
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -70,7 +123,7 @@ dependencies {
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.2'
+    implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.3'
 }
 ```
 
