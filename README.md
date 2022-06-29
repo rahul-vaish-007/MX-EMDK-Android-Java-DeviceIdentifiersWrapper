@@ -1,4 +1,4 @@
-# DeviceIdentifiersWrapper-Sample
+# DeviceIdentifiersWrapper
 
 # NEW !!! Change of REPOSITORY and new UPDATE 0.3 FOR A11... #
 ```text
