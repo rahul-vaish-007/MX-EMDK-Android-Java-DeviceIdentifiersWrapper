@@ -211,7 +211,7 @@ Sample code if you need to get both device identifiers:
                  // The message contains the serial number
                  String mySerialNumber = message;
                  // We've got the serial number, now we can ask for the IMEINumber
-                 DIHelper.getIMEINumber(contextnew IDIResultCallbacks() {
+                 DIHelper.getIMEINumber(context, new IDIResultCallbacks() {
                     @Override
                     public void onSuccess(String message) {
                         // We've got an EMEI number
@@ -237,7 +237,7 @@ Sample code if you need to get both device identifiers:
                 // Do something here with the error message
                 // We had an error with the Serial Number, but it
                 // doesn't prevent us from calling the getIMEINumber method
-                DIHelper.getIMEINumber(contextnew IDIResultCallbacks() {
+                DIHelper.getIMEINumber(context, new IDIResultCallbacks() {
                     @Override
                     public void onSuccess(String message) {
                         // We've got an EMEI number
