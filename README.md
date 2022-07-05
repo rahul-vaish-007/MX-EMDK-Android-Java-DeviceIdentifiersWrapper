@@ -3,13 +3,16 @@
 
 
 
-## NEW !!! 
-## Change of REPOSITORY
-## UPDATED FOR A11...
-## Sample repository running on <=A11
+## Change Log !!! 
+### 1. Change of REPOSITORY
+### 2. UPDATED FOR A11...
+### 3. Added a Sample repository running on <=A11
 
+## Sample Repository
 https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 
+
+## Update for A11
 ```text
         Update your graddle distribution to >= 7.3.3
         update your compileSdkVersion to 30
