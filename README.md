@@ -19,6 +19,8 @@ https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
         Update your Manifest.xml file to add the Query element (as explained in this description)
         Add jitpack.io repository to the project build.graddle file : maven { url 'https://jitpack.io' }
         Update the dependency in the graddle application file: implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.3' or replace 0.3 with + to get the latest version automatically
+        Everything is explained in detail in this documentation.
+        You can use the sample as a copy/paste source.
 ```
 
 
