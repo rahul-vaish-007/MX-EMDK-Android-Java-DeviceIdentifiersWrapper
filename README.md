@@ -1,12 +1,12 @@
-## DeviceIdentifiersWrapper
+# DeviceIdentifiersWrapper
 
 
 
 
-# NEW !!! 
-# Change of REPOSITORY #
-# UPDATED FOR A11... #
-# Sample repository running on <=A11 #
+## NEW !!! 
+## Change of REPOSITORY
+## UPDATED FOR A11...
+## Sample repository running on <=A11
 
 https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 
