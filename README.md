@@ -1,4 +1,7 @@
-# DeviceIdentifiersWrapper
+## DeviceIdentifiersWrapper
+
+
+
 
 # NEW !!! 
 # Change of REPOSITORY #
@@ -14,6 +17,9 @@ https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
         Add jitpack.io repository to the project build.graddle file : maven { url 'https://jitpack.io' }
         Update the dependency in the graddle application file: implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.3' or replace 0.3 with + to get the latest version automatically
 ```
+
+
+
 
 A wrapper to easily retrieve the Serial Number and the IMEI number of an Android 10+ Zebra device.
 
