@@ -23,7 +23,15 @@ https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
         You can use the sample as a copy/paste source.
 ```
 
-
+## Important !!
+```text
+        Due to usage of the EMDK and the need to register the application, it is strongly advised to call the methods in your application class
+		Check https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample implementation.
+		It's a basic implementation using static members.
+		Feel free to remove statics and replace them with a better code in terms of architecture.
+		The goal was to pass the idea that theses  number should be retrieved only once, and the best place for it is the Application class.
+		Note that a mechanism has been added in V0.4 to wait for the EMDK in case it would not be available (the classic use case is when your app respond to the BOOT_COMPLETED event that occurs way before the EMDK finishes its initialization)
+``` 
 
 ## Description
 A wrapper to easily retrieve the Serial Number and the IMEI number of an Android 10+ Zebra device.
@@ -211,7 +219,24 @@ Sample code if you need to get both device identifiers:
                  // The message contains the serial number
                  String mySerialNumber = message;
                  // We've got the serial number, now we can ask for the IMEINumber
-                 getIMEINumber(context);
+                 DIHelper.getIMEINumber(context, new IDIResultCallbacks() {
+                    @Override
+                    public void onSuccess(String message) {
+                        // We've got an EMEI number
+                        String myIMEI = message;
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        // An error occurred
+                    }
+
+                    @Override
+                    public void onDebugStatus(String message) {
+                        // You can use this method to get verbose information
+                        // about what's happening behind the curtain
+                    }
+                });
              }
 
              @Override
@@ -220,7 +245,23 @@ Sample code if you need to get both device identifiers:
                 // Do something here with the error message
                 // We had an error with the Serial Number, but it
                 // doesn't prevent us from calling the getIMEINumber method
-                getIMEINumber(context);
+                DIHelper.getIMEINumber(context, new IDIResultCallbacks() {
+                    @Override
+                    public void onSuccess(String message) {
+                        // We've got an EMEI number
+                        String myIMEI = message;
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        // An error occurred
+                    }
+
+                    @Override
+                    public void onDebugStatus(String message) {
+                        // You can use this method to get verbose information
+                        // about what's happening behind the curtain                    }
+                });
              }
 
              @Override
