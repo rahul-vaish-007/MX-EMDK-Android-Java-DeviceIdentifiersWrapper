@@ -152,20 +152,25 @@ class DIProfileManagerCommand extends DICommandBase {
 
     private void waitForEMDK()
     {
+        logMessage("EMDKManager error, this could be a BOOT_COMPLETED issue.", EMessageType.DEBUG);
+        logMessage("Starting watcher thread to wait for EMDK initialization.", EMessageType.DEBUG);
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 long startDate = new Date().getTime();
                 long delta = 0;
-                long maxWait = 1000 * 60 * 10; // We will try for 10 mns... before stopping
                 while(mEMDKManager == null || delta < DIHelper.MAX_EMDK_TIMEOUT_IN_MS ) {
+                    // Try to initialize EMDK
+                    logMessage("Calling EMDK Initialization method", EMessageType.DEBUG);
                     initializeEMDK();
                     try {
-                        Thread.sleep(5000);
+                        logMessage("Waiting " + DIHelper.WAIT_PERIOD_BEFORE_RETRY_EMDK_RETRIEVAL_IN_MS + " milliseconds before retrying.", EMessageType.DEBUG);
+                        Thread.sleep(DIHelper.WAIT_PERIOD_BEFORE_RETRY_EMDK_RETRIEVAL_IN_MS);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     delta = new Date().getTime() - startDate;
+                    logMessage("Delta in ms since first EMDK retrieval try: " + delta + "ms stops at " + DIHelper.MAX_EMDK_TIMEOUT_IN_MS + "ms", EMessageType.DEBUG);
                 }
             }
         });
