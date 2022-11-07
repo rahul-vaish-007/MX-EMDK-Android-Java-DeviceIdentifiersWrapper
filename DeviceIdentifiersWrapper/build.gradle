@@ -1,9 +1,5 @@
-apply plugin: 'com.android.library'
-
-ext {
-    PUBLISH_GROUP_ID = 'com.zebra.deviceidentifierswrapper'
-    PUBLISH_ARTIFACT_ID = 'deviceidentifierswrapper'
-    PUBLISH_VERSION = '0.2'
+plugins {
+    id 'com.android.library'
 }
 
 android {
