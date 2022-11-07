@@ -34,11 +34,11 @@ https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 ## Important !!
 ```text
         Due to usage of the EMDK and the need to register the application, it is strongly advised to call the methods in your application class
-		Check https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample implementation.
-		It's a basic implementation using static members.
-		Feel free to remove statics and replace them with a better code in terms of architecture.
-		The goal was to pass the idea that theses  number should be retrieved only once, and the best place for it is the Application class.
-		Note that a mechanism has been added in V0.4 to wait for the EMDK in case it would not be available (the classic use case is when your app respond to the BOOT_COMPLETED event that occurs way before the EMDK finishes its initialization)
+	Check https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample implementation.
+	It's a basic implementation using static members.
+	Feel free to remove statics and replace them with a better code in terms of architecture.
+	The goal was to pass the idea that theses  number should be retrieved only once, and the best place for it is the Application class.
+	Note that a mechanism has been added in V0.4 to wait for the EMDK in case it would not be available (the classic use case is when your app respond to the BOOT_COMPLETED event that occurs way before the EMDK finishes its initialization)
 ``` 
 
 ## Description
