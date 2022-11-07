@@ -172,6 +172,7 @@ class DIProfileManagerCommand extends DICommandBase {
                     delta = new Date().getTime() - startDate;
                     logMessage("Delta in ms since first EMDK retrieval try: " + delta + "ms stops at " + DIHelper.MAX_EMDK_TIMEOUT_IN_MS + "ms", EMessageType.DEBUG);
                 }
+                logMessage("Could not retrieve EMDK Manager after waiting " + DIHelper.WAIT_PERIOD_BEFORE_RETRY_EMDK_RETRIEVAL_IN_MS/DIHelper.SEC_IN_MS + " seconds. Please contact your administrator or check logcat for any EMDK related error.", EMessageType.ERROR);
             }
         });
         t.setPriority(Thread.MIN_PRIORITY);
