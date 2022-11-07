@@ -11,7 +11,7 @@
 ## Sample Repository
 https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 
-## V0.4 : Basic cache mechanism & Wait for EMDK availability
+## V0.4 to v0.8 : Basic cache mechanism & Wait for EMDK availability
 ```text
         Added basic cache mechanism.
 	The IMei and the Serial number will be cached once they get retrieved.
@@ -19,6 +19,9 @@ https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 	DIHelper.resetCachedValues()
 	Added a mechanism to wait for the EMDK if it is not available (when responding to the BOOT_COMPLETED event for ex.)
 	To be tested... feel free to report any issue regarding this feature.
+	Check the sample for a basic implementation.
+	Added lots of logs that will be sent to logCat or to the onDebugStatus callback method.
+	Updated gradle version to release 7.3.3
 ```
 ## V0.3 : Update for A11
 ```text
