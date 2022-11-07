@@ -24,9 +24,23 @@ public class DIHelper {
     // TODO: Put your custom certificate in the apkCertificate member for MX AccessMgr registering (only if necessary and if you know what you are doing)
     public static Signature apkCertificate = null;
 
+    protected static String sIMEI = null;
+    protected static String sSerialNumber = null;
+
+    public static void resetCachedValues()
+    {
+        sIMEI = null;
+        sSerialNumber = null;
+    }
+
     // This method will return the serial number in the string passed through the onSuccess method
     public static void getSerialNumber(Context context, IDIResultCallbacks callbackInterface)
     {
+        if(sSerialNumber != null)
+        {
+            callbackInterface.onSuccess(sSerialNumber);
+            return;
+        }
         if (android.os.Build.VERSION.SDK_INT < 29) {
             returnSerialUsingAndroidAPIs(context, callbackInterface);
         } else {
@@ -37,9 +51,11 @@ public class DIHelper {
     @SuppressLint({"MissingPermission", "ObsoleteSdkInt", "HardwareIds"})
     private static void returnSerialUsingAndroidAPIs(Context context, IDIResultCallbacks callbackInterface) {
         if (android.os.Build.VERSION.SDK_INT < 26) {
+            sSerialNumber = Build.SERIAL;
             callbackInterface.onSuccess(Build.SERIAL);
         } else {
             if (ContextCompat.checkSelfPermission(context, permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+                sSerialNumber = Build.getSerial();
                 callbackInterface.onSuccess(Build.getSerial());
             } else {
                 callbackInterface.onError("Please grant READ_PHONE_STATE permission");
@@ -47,15 +63,38 @@ public class DIHelper {
         }
     }
 
-    private static void returnSerialUsingZebraAPIs(Context context, IDIResultCallbacks callbackInterface) {
+    private static void returnSerialUsingZebraAPIs(Context context, final IDIResultCallbacks callbackInterface) {
+        IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
+            @Override
+            public void onSuccess(String message) {
+                sSerialNumber = message;
+                callbackInterface.onSuccess(message);
+            }
+
+            @Override
+            public void onError(String message) {
+                callbackInterface.onError(message);
+            }
+
+            @Override
+            public void onDebugStatus(String message) {
+                callbackInterface.onDebugStatus(message);
+            }
+        };
+
         new RetrieveOEMInfoTask()
             .execute(context, Uri.parse("content://oem_info/oem.zebra.secure/build_serial"),
-                callbackInterface);
+                    tempCallbackInterface);
     }
 
     // This method will return the imei number in the string passed through the onSuccess method
     public static void getIMEINumber(Context context, IDIResultCallbacks callbackInterface)
     {
+        if(sIMEI != null)
+        {
+            callbackInterface.onSuccess(sIMEI);
+            return;
+        }
         if (android.os.Build.VERSION.SDK_INT < 29) {
             returnImeiUsingAndroidAPIs(context, callbackInterface);
         } else {
@@ -68,6 +107,7 @@ public class DIHelper {
         TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         if (android.os.Build.VERSION.SDK_INT < 26) {String imei = telephonyManager.getDeviceId();
             if (imei != null && !imei.isEmpty()) {
+                sIMEI = imei;
                 callbackInterface.onSuccess(imei);
             } else {
                 callbackInterface.onError("Could not get IMEI number");
@@ -76,6 +116,7 @@ public class DIHelper {
             if (ContextCompat.checkSelfPermission(context, permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
                 String imei = telephonyManager.getImei();
                 if (imei != null && !imei.isEmpty()) {
+                    sIMEI = imei;
                     callbackInterface.onSuccess(imei);
                 } else {
                     callbackInterface.onError("Could not get IMEI number");
@@ -86,8 +127,26 @@ public class DIHelper {
         }
     }
 
-    private static void returnImeiUsingZebraAPIs(Context context, IDIResultCallbacks callbackInterface) {
+    private static void returnImeiUsingZebraAPIs(Context context, final IDIResultCallbacks callbackInterface) {
+        IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
+            @Override
+            public void onSuccess(String message) {
+                sIMEI = message;
+                callbackInterface.onSuccess(message);
+            }
+
+            @Override
+            public void onError(String message) {
+                callbackInterface.onError(message);
+            }
+
+            @Override
+            public void onDebugStatus(String message) {
+                callbackInterface.onDebugStatus(message);
+            }
+        };
+
         new RetrieveOEMInfoTask().execute(context, Uri.parse("content://oem_info/wan/imei"),
-            callbackInterface);
+            tempCallbackInterface);
     }
 }
