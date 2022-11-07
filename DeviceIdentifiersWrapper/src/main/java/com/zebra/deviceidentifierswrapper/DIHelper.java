@@ -43,6 +43,10 @@ public class DIHelper {
     {
         if(sSerialNumber != null)
         {
+            if(callbackInterface != null)
+            {
+                callbackInterface.onDebugStatus("Serial number already in cache.");
+            }
             callbackInterface.onSuccess(sSerialNumber);
             return;
         }
@@ -97,6 +101,10 @@ public class DIHelper {
     {
         if(sIMEI != null)
         {
+            if(callbackInterface != null)
+            {
+                callbackInterface.onDebugStatus("IMEI number already in cache.");
+            }
             callbackInterface.onSuccess(sIMEI);
             return;
         }
