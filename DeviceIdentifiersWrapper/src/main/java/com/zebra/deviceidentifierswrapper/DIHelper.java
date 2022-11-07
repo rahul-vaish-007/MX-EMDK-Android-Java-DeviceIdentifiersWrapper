@@ -27,6 +27,9 @@ public class DIHelper {
     protected static String sIMEI = null;
     protected static String sSerialNumber = null;
 
+    private static final long MIN_IN_MS = 1000 * 60;
+    public static long MAX_EMDK_TIMEOUT_IN_MS = 10 * MIN_IN_MS; // 10 minutes
+
     public static void resetCachedValues()
     {
         sIMEI = null;

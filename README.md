@@ -11,8 +11,16 @@
 ## Sample Repository
 https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 
-
-## Update for A11
+## V0.4 : Basic cache mechanism
+```text
+        Added basic cache mechanism.
+		The IMei and the Serial number will be cached once they get retrieved.
+		The cache can be reset with the method: 
+		DIHelper.resetCachedValues()
+		Added a mechanism to wait for the EMDK if it is not available (when responding to the BOOT_COMPLETED event for ex.
+		To be tested... feel free to report any issue regarding this feature.
+```
+## V0.3 : Update for A11
 ```text
         Update your graddle distribution to >= 7.3.3
         update your compileSdkVersion to 30

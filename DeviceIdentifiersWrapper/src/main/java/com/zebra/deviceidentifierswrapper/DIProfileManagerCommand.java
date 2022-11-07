@@ -17,6 +17,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Date;
 
 class DIProfileManagerCommand extends DICommandBase {
     public class ErrorHolder
@@ -54,6 +55,8 @@ class DIProfileManagerCommand extends DICommandBase {
 
     // Provides full error description string
     public String msErrorString = "";
+
+    private boolean bInitializing = false;
 
     // Status Listener implementation (ensure that we retrieve the profile manager asynchronously
     EMDKManager.StatusListener mStatusListener = new EMDKManager.StatusListener() {
@@ -114,6 +117,9 @@ class DIProfileManagerCommand extends DICommandBase {
 
     private void initializeEMDK()
     {
+        if(bInitializing)
+            return;
+        bInitializing = true;
         if(mEMDKManager == null)
         {
             EMDKResults results = null;
@@ -126,6 +132,7 @@ class DIProfileManagerCommand extends DICommandBase {
             {
                 logMessage("Error while requesting EMDKManager.\n" + e.getLocalizedMessage(), EMessageType.ERROR);
                 e.printStackTrace();
+                waitForEMDK();
                 return;
             }
 
@@ -134,12 +141,36 @@ class DIProfileManagerCommand extends DICommandBase {
                 logMessage("EMDKManager request command issued with success", EMessageType.DEBUG);
             }else {
                 logMessage("EMDKManager request command error", EMessageType.ERROR);
+                waitForEMDK();
             }
         }
         else
         {
             onEMDKManagerRetrieved(mEMDKManager);
         }
+    }
+
+    private void waitForEMDK()
+    {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long startDate = new Date().getTime();
+                long delta = 0;
+                long maxWait = 1000 * 60 * 10; // We will try for 10 mns... before stopping
+                while(mEMDKManager == null || delta < DIHelper.MAX_EMDK_TIMEOUT_IN_MS ) {
+                    initializeEMDK();
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    delta = new Date().getTime() - startDate;
+                }
+            }
+        });
+        t.setPriority(Thread.MIN_PRIORITY);
+        t.start();
     }
 
     private void onEMDKManagerRetrieved(EMDKManager emdkManager)
@@ -186,6 +217,7 @@ class DIProfileManagerCommand extends DICommandBase {
     private void onProfileManagerInitialized(ProfileManager profileManager)
     {
         mProfileManager = profileManager;
+        bInitializing = false;
         logMessage("Profile Manager retrieved.", EMessageType.DEBUG);
         processMXContent();
     }

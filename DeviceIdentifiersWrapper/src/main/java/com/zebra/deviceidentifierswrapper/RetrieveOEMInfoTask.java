@@ -1,5 +1,6 @@
 package com.zebra.deviceidentifierswrapper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -163,7 +164,7 @@ class RetrieveOEMInfoTask extends AsyncTask<Object, Void, Boolean> {
             else{
                 for (int i = 0; i < cursor.getColumnCount(); i++) {
                     try {
-                        String data = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(i)));
+                        @SuppressLint("Range") String data = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(i)));
                         resultCallbacks.onSuccess(data);
                         cursor.close();
                         return;
