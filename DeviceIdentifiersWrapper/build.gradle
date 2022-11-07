@@ -10,7 +10,7 @@ android {
     compileSdkVersion 32
 
     defaultConfig {
-        minSdkVersion 28
+        minSdkVersion 19
         targetSdkVersion 32
         versionCode 4
         versionName "0.4"
