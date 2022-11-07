@@ -11,14 +11,14 @@
 ## Sample Repository
 https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 
-## V0.4 : Basic cache mechanism
+## V0.4 : Basic cache mechanism & Wait for EMDK availability
 ```text
         Added basic cache mechanism.
-		The IMei and the Serial number will be cached once they get retrieved.
-		The cache can be reset with the method: 
-		DIHelper.resetCachedValues()
-		Added a mechanism to wait for the EMDK if it is not available (when responding to the BOOT_COMPLETED event for ex.
-		To be tested... feel free to report any issue regarding this feature.
+	The IMei and the Serial number will be cached once they get retrieved.
+	The cache can be reset with the method: 
+	DIHelper.resetCachedValues()
+	Added a mechanism to wait for the EMDK if it is not available (when responding to the BOOT_COMPLETED event for ex.)
+	To be tested... feel free to report any issue regarding this feature.
 ```
 ## V0.3 : Update for A11
 ```text
@@ -34,11 +34,11 @@ https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 ## Important !!
 ```text
         Due to usage of the EMDK and the need to register the application, it is strongly advised to call the methods in your application class
-		Check https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample implementation.
-		It's a basic implementation using static members.
-		Feel free to remove statics and replace them with a better code in terms of architecture.
-		The goal was to pass the idea that theses  number should be retrieved only once, and the best place for it is the Application class.
-		Note that a mechanism has been added in V0.4 to wait for the EMDK in case it would not be available (the classic use case is when your app respond to the BOOT_COMPLETED event that occurs way before the EMDK finishes its initialization)
+	Check https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample implementation.
+	It's a basic implementation using static members.
+	Feel free to remove statics and replace them with a better code in terms of architecture.
+	The goal was to pass the idea that theses  number should be retrieved only once, and the best place for it is the Application class.
+	Note that a mechanism has been added in V0.4 to wait for the EMDK in case it would not be available (the classic use case is when your app respond to the BOOT_COMPLETED event that occurs way before the EMDK finishes its initialization)
 ``` 
 
 ## Description
