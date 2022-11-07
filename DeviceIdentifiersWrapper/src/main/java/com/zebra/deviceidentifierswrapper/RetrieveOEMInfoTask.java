@@ -107,7 +107,10 @@ class RetrieveOEMInfoTask extends AsyncTask<Object, Void, Boolean> {
                 // You can copy/paste this snippet if you want to provide your own
                 // certificate
                 // TODO: use the following code snippet to extract your custom certificate if necessary
-                final Signature[] arrSignatures = packageInfo.signingInfo.getApkContentsSigners();
+                Signature[] arrSignatures = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                    arrSignatures = packageInfo.signingInfo.getApkContentsSigners();
+                }
                 if(arrSignatures == null || arrSignatures.length == 0)
                 {
                     if(callbackInterface != null)
@@ -125,7 +128,10 @@ class RetrieveOEMInfoTask extends AsyncTask<Object, Void, Boolean> {
             final byte[] rawCert = sig.toByteArray();
 
             // Get the certificate as a base64 string
-            String encoded = Base64.getEncoder().encodeToString(rawCert);
+            String encoded = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                encoded = Base64.getEncoder().encodeToString(rawCert);
+            }
 
             profileData =
                     "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
