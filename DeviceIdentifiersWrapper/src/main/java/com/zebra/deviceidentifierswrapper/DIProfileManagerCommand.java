@@ -56,6 +56,7 @@ class DIProfileManagerCommand extends DICommandBase {
     // Provides full error description string
     public String msErrorString = "";
 
+    // To prevent multiple initializations at the same time
     private boolean bInitializing = false;
 
     // Status Listener implementation (ensure that we retrieve the profile manager asynchronously
@@ -172,6 +173,7 @@ class DIProfileManagerCommand extends DICommandBase {
                     delta = new Date().getTime() - startDate;
                     logMessage("Delta in ms since first EMDK retrieval try: " + delta + "ms stops at " + DIHelper.MAX_EMDK_TIMEOUT_IN_MS + "ms", EMessageType.DEBUG);
                 }
+                bInitializing = false;
                 logMessage("Could not retrieve EMDK Manager after waiting " + DIHelper.WAIT_PERIOD_BEFORE_RETRY_EMDK_RETRIEVAL_IN_MS/DIHelper.SEC_IN_MS + " seconds. Please contact your administrator or check logcat for any EMDK related error.", EMessageType.ERROR);
             }
         });
