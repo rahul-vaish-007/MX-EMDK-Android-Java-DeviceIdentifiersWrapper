@@ -2,7 +2,7 @@
 
 ## Easy access to serial number and IMEI
 
-Forget about StageNow, EMDK, complexity....
+Forget about StageNow, EMDK, certificates, application signature... complexity....
 
 Just get the serial number and the IMEI number of your Zebra device in one method call (see at the end of this document).
 
