@@ -1,9 +1,5 @@
-apply plugin: 'com.android.library'
-
-ext {
-    PUBLISH_GROUP_ID = 'com.zebra.deviceidentifierswrapper'
-    PUBLISH_ARTIFACT_ID = 'deviceidentifierswrapper'
-    PUBLISH_VERSION = '0.2'
+plugins {
+    id 'com.android.library'
 }
 
 android {
@@ -12,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 32
-        versionCode 2
-        versionName "0.2"
+        versionCode 8
+        versionName "0.8"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -25,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
@@ -35,55 +35,4 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     compileOnly 'com.symbol:emdk:+'
-}
-
-/*
-Generate release files for publication and Zip them
-https://medium.com/@daniellevass/how-to-publish-your-android-studio-library-to-jcenter-5384172c4739
-https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle
- */
-
-// ./gradlew clean build generateRelease
-apply plugin: 'maven'
-
-def version = project.PUBLISH_VERSION
-
-def localReleaseDest = "${buildDir}/release/${version}"
-
-task androidJavadocs(type: Javadoc) {
-    failOnError = false
-    source = android.sourceSets.main.java.srcDirs
-    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-    classpath += files(ext.androidJar)
-}
-
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-    archiveClassifier = 'javadoc'
-    from androidJavadocs.destinationDir
-}
-
-task androidSourcesJar(type: Jar) {
-    archiveClassifier = 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
-
-task zipRelease(type: Zip) {
-    from localReleaseDest
-    destinationDir buildDir
-    archiveBaseName =  "release-${version}"
-}
-
-task generateRelease {
-    doLast {
-        println "Release ${version} can be found at ${localReleaseDest}/"
-        println "Release ${version} zipped can be found ${buildDir}/release-${version}.zip"
-    }
-}
-
-generateRelease.dependsOn(zipRelease)
-
-
-artifacts {
-    archives androidSourcesJar
-    archives androidJavadocsJar
 }
