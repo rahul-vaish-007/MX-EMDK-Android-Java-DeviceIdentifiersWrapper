@@ -21,7 +21,11 @@ Have fun with Zebra's devices :)
 https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
 
 ## V0.8 to V0.9 : Updated for A13
-
+```text
+	Added BIND_NOTIFICATION_LISTENER_SERVICE permission
+	Added com.symbol.emdk.emdkservice querie
+	API updated to 33
+```
 ## V0.4 to v0.8 : Basic cache mechanism & Wait for EMDK availability
 ```text
         Added basic cache mechanism.
