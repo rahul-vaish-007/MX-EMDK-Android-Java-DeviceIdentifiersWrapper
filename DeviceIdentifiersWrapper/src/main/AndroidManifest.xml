@@ -4,5 +4,6 @@
   <uses-permission android:name="com.zebra.provider.READ"/>
   <queries>
     <package android:name="com.symbol.emdk.emdkservice" />
+    <provider android:authorities="oem_info" />
   </queries>
 </manifest>
