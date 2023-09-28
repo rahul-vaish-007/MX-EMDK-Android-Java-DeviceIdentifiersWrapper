@@ -14,11 +14,13 @@ Have fun with Zebra's devices :)
 
 ## Change Log !!! 
 ### 1. Change of REPOSITORY
-### 2. UPDATED FOR A11...
-### 3. Added a Sample repository running on <=A11
+### 2. UPDATED FOR A13...
+### 3. Added a Sample repository running on <=A13
 
 ## Sample Repository
 https://github.com/ltrudu/DeviceIdentifiersWrapper-Sample
+
+## V0.8 to V0.9 : Updated for A13
 
 ## V0.4 to v0.8 : Basic cache mechanism & Wait for EMDK availability
 ```text
@@ -74,6 +76,7 @@ To use this helper on Zebra Android devices running Android 10 or higher, first 
 ```xml
 <uses-permission android:name="com.zebra.provider.READ"/>
 <uses-permission android:name="com.symbol.emdk.permission.EMDK" />
+<uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
 ```
 
 Then add a query element to retrive the data (only necessary for Android builds >= 11)
@@ -81,6 +84,7 @@ Then add a query element to retrive the data (only necessary for Android builds 
 ```xml
     <queries>
         <provider android:authorities="oem_info" />
+        <package android:name="com.symbol.emdk.emdkservice" />
     </queries>
 ```
 
@@ -97,10 +101,12 @@ Sample AdroidManifest.xml:
     <!--> TODO: Add these permissions to your manifest </-->
     <uses-permission android:name="com.zebra.provider.READ"/>
     <uses-permission android:name="com.symbol.emdk.permission.EMDK" />
+    <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
 
     <!--> TODO: Add query element to your manifest </-->
     <queries>
         <provider android:authorities="oem_info" />
+        <package android:name="com.symbol.emdk.emdkservice" />
     </queries>
         
     <application
