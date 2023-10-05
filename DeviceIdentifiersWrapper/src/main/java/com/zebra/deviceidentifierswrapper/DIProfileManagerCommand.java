@@ -65,6 +65,7 @@ class DIProfileManagerCommand extends DICommandBase {
         public void onStatus(EMDKManager.StatusData statusData, EMDKBase emdkBase) {
             if(statusData.getResult() == EMDKResults.STATUS_CODE.SUCCESS)
             {
+                logMessage("Profile manager retrieved.", EMessageType.DEBUG);
                 onProfileManagerInitialized((ProfileManager)emdkBase);
             }
             else
@@ -188,6 +189,7 @@ class DIProfileManagerCommand extends DICommandBase {
         if(mProfileManager == null)
         {
             try {
+                logMessage("Requesting profile manager.", EMessageType.DEBUG);
                 emdkManager.getInstanceAsync(EMDKManager.FEATURE_TYPE.PROFILE, mStatusListener);
             } catch (EMDKException e) {
                 logMessage("Error when trying to retrieve profile manager: " + e.getMessage(), EMessageType.ERROR);
@@ -226,7 +228,7 @@ class DIProfileManagerCommand extends DICommandBase {
     {
         mProfileManager = profileManager;
         bInitializing = false;
-        logMessage("Profile Manager retrieved.", EMessageType.DEBUG);
+        logMessage("Processing MX Content", EMessageType.DEBUG);
         processMXContent();
     }
 
@@ -263,6 +265,7 @@ class DIProfileManagerCommand extends DICommandBase {
         String[] params = new String[1];
         params[0] = msProfileData;
 
+        logMessage("Processing profile :" + msProfileData, EMessageType.VERBOSE);
         EMDKResults results = mProfileManager.processProfile(msProfileName, ProfileManager.PROFILE_FLAG.SET, params);
 
         //Check the return status of processProfile
