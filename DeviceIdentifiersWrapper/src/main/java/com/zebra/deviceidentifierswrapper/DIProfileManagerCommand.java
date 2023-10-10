@@ -2,6 +2,7 @@ package com.zebra.deviceidentifierswrapper;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
@@ -190,7 +191,20 @@ class DIProfileManagerCommand extends DICommandBase {
         {
             try {
                 logMessage("Requesting profile manager.", EMessageType.DEBUG);
-                emdkManager.getInstanceAsync(EMDKManager.FEATURE_TYPE.PROFILE, mStatusListener);
+                logMessage("Current API version: " + android.os.Build.VERSION.SDK_INT, EMessageType.VERBOSE);
+                if(android.os.Build.VERSION.SDK_INT < 33) {
+                    logMessage("Requesting profile manager Asynchonously", EMessageType.DEBUG);
+                    emdkManager.getInstanceAsync(EMDKManager.FEATURE_TYPE.PROFILE, mStatusListener);
+                }
+                else
+                {
+                    logMessage("Requesting profile manager synchronized", EMessageType.DEBUG);
+                    ProfileManager profileManager = (ProfileManager) emdkManager.getInstance(EMDKManager.FEATURE_TYPE.PROFILE);
+                    if(profileManager != null)
+                    {
+                        onProfileManagerInitialized(profileManager);
+                    }
+                }
             } catch (EMDKException e) {
                 logMessage("Error when trying to retrieve profile manager: " + e.getMessage(), EMessageType.ERROR);
             }
