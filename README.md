@@ -166,7 +166,7 @@ task clean(type: Delete) {
 
 Finally, add DeviceIdentifierWrapper dependency to your application build.graddle file:
 ```text
-        implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:0.3'        
+        implementation 'com.github.ltrudu:DeviceIdentifiersWrapper:+'        
 ```
 
 Sample application build.graddle:
