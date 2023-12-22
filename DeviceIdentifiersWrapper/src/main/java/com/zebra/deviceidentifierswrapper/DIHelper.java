@@ -3,18 +3,13 @@ package com.zebra.deviceidentifierswrapper;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import androidx.core.content.ContextCompat;
-import java.util.Base64;
 
 public class DIHelper {
 
@@ -26,6 +21,8 @@ public class DIHelper {
 
     protected static String sIMEI = null;
     protected static String sSerialNumber = null;
+
+    protected static String sWifiMacAddress = null;
 
     public static final long SEC_IN_MS = 1000;
     public static final long MIN_IN_MS = SEC_IN_MS * 60;
@@ -54,6 +51,17 @@ public class DIHelper {
             returnSerialUsingAndroidAPIs(context, callbackInterface);
         } else {
             returnSerialUsingZebraAPIs(context, callbackInterface);
+        }
+    }
+
+    public static void getWifiMacAddress(Context context, IDIResultCallbacks callbackInterface) {
+        if (sWifiMacAddress != null) {
+            if (callbackInterface != null) {
+                callbackInterface.onDebugStatus("Wifi Mac address already in cache.");
+                callbackInterface.onSuccess(sWifiMacAddress);
+            }
+        } else {
+            getWifiMacAddressUsingZebraAPIs(context, callbackInterface);
         }
     }
 
@@ -94,6 +102,30 @@ public class DIHelper {
         new RetrieveOEMInfoTask()
             .execute(context, Uri.parse("content://oem_info/oem.zebra.secure/build_serial"),
                     tempCallbackInterface);
+    }
+
+    private static void getWifiMacAddressUsingZebraAPIs(Context context, final IDIResultCallbacks callbackInterface) {
+        IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
+            @Override
+            public void onSuccess(String message) {
+                sWifiMacAddress = message;
+                callbackInterface.onSuccess(message);
+            }
+
+            @Override
+            public void onError(String message) {
+                callbackInterface.onError(message);
+            }
+
+            @Override
+            public void onDebugStatus(String message) {
+                callbackInterface.onDebugStatus(message);
+            }
+        };
+
+        new RetrieveOEMInfoTask()
+                .execute(context, Uri.parse("content://oem_info/oem.zebra.secure/wifi_mac"),
+                        tempCallbackInterface);
     }
 
     // This method will return the imei number in the string passed through the onSuccess method
