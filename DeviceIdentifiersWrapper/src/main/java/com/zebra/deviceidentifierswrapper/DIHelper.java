@@ -194,4 +194,85 @@ public class DIHelper {
         new RetrieveOEMInfoTask().execute(context, Uri.parse("content://oem_info/wan/imei"),
             tempCallbackInterface);
     }
+
+    public static void unregisterAppFromOEM(Context context, IDIResultCallbacks callbackInterface) {
+        unregisterAppFromSerialNumberOEM(context, callbackInterface);
+        unregisterAppFromWifiMacOEM(context, callbackInterface);
+        unregisterAppFromImeiOEM(context, callbackInterface);
+    }
+
+    private static void unregisterAppFromSerialNumberOEM(Context context,
+                                             IDIResultCallbacks callbackInterface) {
+        IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
+            @Override
+            public void onSuccess(String message) {
+                sSerialNumber = null;
+                callbackInterface.onSuccess(message);
+            }
+
+            @Override
+            public void onError(String message) {
+                callbackInterface.onError(message);
+            }
+
+            @Override
+            public void onDebugStatus(String message) {
+                callbackInterface.onDebugStatus(message);
+            }
+        };
+
+        new UnregisterAppTask()
+                .execute(context, Uri.parse("content://oem_info/oem.zebra.secure/build_serial"),
+                        tempCallbackInterface);
+    }
+
+    private static void unregisterAppFromWifiMacOEM(Context context,
+                                                    IDIResultCallbacks callbackInterface) {
+        IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
+            @Override
+            public void onSuccess(String message) {
+                sWifiMacAddress = null;
+                callbackInterface.onSuccess(message);
+            }
+
+            @Override
+            public void onError(String message) {
+                callbackInterface.onError(message);
+            }
+
+            @Override
+            public void onDebugStatus(String message) {
+                callbackInterface.onDebugStatus(message);
+            }
+        };
+
+        new UnregisterAppTask()
+                .execute(context, Uri.parse("content://oem_info/oem.zebra.secure/wifi_mac"),
+                        tempCallbackInterface);
+    }
+
+    private static void unregisterAppFromImeiOEM(Context context,
+                                                 IDIResultCallbacks callbackInterface) {
+        IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
+            @Override
+            public void onSuccess(String message) {
+                sWifiMacAddress = null;
+                callbackInterface.onSuccess(message);
+            }
+
+            @Override
+            public void onError(String message) {
+                callbackInterface.onError(message);
+            }
+
+            @Override
+            public void onDebugStatus(String message) {
+                callbackInterface.onDebugStatus(message);
+            }
+        };
+
+        new UnregisterAppTask()
+                .execute(context, Uri.parse("content://oem_info/wan/imei"),
+                        tempCallbackInterface);
+    }
 }
