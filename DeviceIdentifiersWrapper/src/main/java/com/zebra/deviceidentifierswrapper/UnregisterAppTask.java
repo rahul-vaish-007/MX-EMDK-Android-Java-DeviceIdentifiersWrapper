@@ -40,7 +40,7 @@ class UnregisterAppTask extends AsyncTask<Object, Void, Boolean> {
                             "<parm name=\"ProfileName\" value=\"" + profileName + "\"/>" +
                             "<characteristic type=\"AccessMgr\" version=\"9.2\">" +
                             "<parm name=\"OperationMode\" value=\"1\" />" +
-                            "<parm name=\"ServiceAccessAction\" value=\"3\" />" +
+                            "<parm name=\"ServiceAccessAction\" value=\"5\" />" +
                             "<parm name=\"ServiceIdentifier\" value=\"" + serviceIdentifier + "\" />" +
                             "<parm name=\"CallerPackageName\" value=\"" + context.getPackageName() + "\" />" +
                             "<parm name=\"CallerSignature\" value=\"" + callerSignature + "\" />" +

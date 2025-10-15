@@ -195,14 +195,8 @@ public class DIHelper {
             tempCallbackInterface);
     }
 
-    public static void unregisterAppFromOEM(Context context, IDIResultCallbacks callbackInterface) {
-        unregisterAppFromSerialNumberOEM(context, callbackInterface);
-        unregisterAppFromWifiMacOEM(context, callbackInterface);
-        unregisterAppFromImeiOEM(context, callbackInterface);
-    }
-
-    private static void unregisterAppFromSerialNumberOEM(Context context,
-                                             IDIResultCallbacks callbackInterface) {
+    public static void unregisterFromSerialNumberAction(Context context,
+                                                        IDIResultCallbacks callbackInterface) {
         IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
             @Override
             public void onSuccess(String message) {
@@ -226,8 +220,8 @@ public class DIHelper {
                         tempCallbackInterface);
     }
 
-    private static void unregisterAppFromWifiMacOEM(Context context,
-                                                    IDIResultCallbacks callbackInterface) {
+    public static void unregisterFromWifiMacAction(Context context,
+                                                   IDIResultCallbacks callbackInterface) {
         IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
             @Override
             public void onSuccess(String message) {
@@ -251,8 +245,8 @@ public class DIHelper {
                         tempCallbackInterface);
     }
 
-    private static void unregisterAppFromImeiOEM(Context context,
-                                                 IDIResultCallbacks callbackInterface) {
+    public static void unregisterFromImeiAction(Context context,
+                                                IDIResultCallbacks callbackInterface) {
         IDIResultCallbacks tempCallbackInterface = new IDIResultCallbacks() {
             @Override
             public void onSuccess(String message) {
