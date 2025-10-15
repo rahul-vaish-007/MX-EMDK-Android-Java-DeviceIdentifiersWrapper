@@ -1,7 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    println "Running gradle version: ${gradle.gradleVersion} from home: ${gradle.gradleHomeDir}"
+    println "With Java home: ${System.getProperty('java.home')} and " +
+            "version: ${System.getProperty('java.version')} and " +
+            "vendor: ${System.getProperty('java.vendor')}"
+}
+
 plugins {
-    id 'com.android.application' version '7.2.2' apply false
-    id 'com.android.library' version '7.2.2' apply false
+    id 'com.android.application' version '8.3.0' apply false
+    id 'com.android.library' version '8.3.0' apply false
 }
 
 task clean(type: Delete) {
